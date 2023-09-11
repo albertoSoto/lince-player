@@ -1,8 +1,11 @@
 {
-  "name": "react-library-vite",
+  "name": "react-library-vite-support",
+  "config": {
+    "npmTitle": "React TSX Library with Vite support"
+  },
   "version": "0.0.0",
   "description": "A scaffold app for building a React component/library using Vite, ready for publication to npm",
-  "author": "Tom Southall",
+  "author": "Alberto Soto Fernandez",
   "keywords": [],
   "files": [
     "dist",
