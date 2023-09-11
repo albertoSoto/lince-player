@@ -2,6 +2,8 @@ import {useEffect, useRef} from "react";
 import videojs from "video.js";
 import "videojs-youtube";
 import "video.js/dist/video-js.css";
+import {UrlType} from "../interfaces/UrlType.ts";
+import {KeyboardShortcuts} from "../interfaces/KeyboardShortcuts.ts";
 
 const initialOptions = {
     playbackRates: [0.1, 0.5, 1, 1.5, 2, 4],
@@ -18,16 +20,13 @@ const initialOptions = {
         }
     },
     userActions: {
-        hotkeys: function (event: { which: number; }) {
+        hotkeys: function (event: { which: KeyboardShortcuts; }) {
             // `this` is the player in this context
-
-            // `x` key = pause
-            if (event.which === 88) {
+            if (event.which === KeyboardShortcuts.PAUSE) {
                 // @ts-ignore
                 this.pause();
             }
-            // `y` key = play
-            if (event.which === 89) {
+            if (event.which === KeyboardShortcuts.PLAY) {
                 // @ts-ignore
                 this.play();
             }
@@ -35,25 +34,28 @@ const initialOptions = {
     }
 };
 
-const videoJsOptions = {
-    sources: [
-        {
-            type: "video/youtube",
-            src: "https://www.youtube.com/watch?v=F5GO6JwzfkY"
-        }
-    ]
-};
 
-export enum UrlType {
-    YoutubeUrl,
-    VideoUrl
-}
 
 export default function LinceVideoPlayer(props: { url: string, type?: UrlType }) {
+    const {type,url} = props;
     const videoNode = useRef(null);
     const player = useRef(null);
     const initialized = useRef(false);
-
+    const getFileExtension = (link: string) =>{
+        if (link){
+           return link.split('.').pop();
+        }
+        return "video/mp4";
+    }
+    const videoJsOptions = {
+        sources: [
+            {
+                type: type == UrlType.YoutubeUrl? "video/youtube":`video/${getFileExtension(url)}`, //"video/mp4"
+                // src: "https://www.youtube.com/watch?v=F5GO6JwzfkY"
+                src: url
+            }
+        ]
+    };
     useEffect(() => {
         if (videoNode.current && !initialized.current) {
             initialized.current = true; //prevent duplicate initialization

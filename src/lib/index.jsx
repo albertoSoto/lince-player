@@ -1,3 +1,4 @@
-import HelloWorldTS from "./components/HelloWorldTS";
+import LinceVideoPlayer from "./components/LinceVideoPlayer";
+import {UrlType} from "./interfaces/UrlType";
 
-export {HelloWorldTS}
+export {LinceVideoPlayer, UrlType}
