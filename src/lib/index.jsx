@@ -1,3 +1,4 @@
+import HelloWorld from "./components/HelloWorld";
+import HelloWorldTS from "./components/HelloWorldTS";
 
-
-export
+export {HelloWorld, HelloWorldTS}
