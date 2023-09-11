@@ -1,22 +1,29 @@
 {
-  "name": "react-library-vite-tsx",
+  "name": "lince-player",
   "config": {
-    "npmTitle": "React TSX Library with Vite support"
+    "npmTitle": "LINCE PLUS video player"
   },
   "version": "0.0.0",
-  "description": "A scaffold app for building a React component/library using Vite, ready for publication to npm",
+  "description": "Video player used in LINCE PLUS",
   "author": "Alberto Soto Fernandez",
-  "keywords": [],
+  "keywords": [
+    "react",
+    "video",
+    "video js",
+    "youtube",
+    "player",
+    "LINCE PLUS"
+  ],
   "files": [
     "dist",
     "README.md"
   ],
-  "main": "./dist/react-library-vite.umd.js",
-  "module": "./dist/react-library-vite.es.js",
+  "main": "./dist/lince-player.umd.js",
+  "module": "./dist/lince-player.es.js",
   "exports": {
     ".": {
-      "import": "./dist/react-library-vite.es.js",
-      "require": "./dist/react-library-vite.umd.js"
+      "import": "./dist/lince-player.es.js",
+      "require": "./dist/lince-player.umd.js"
     }
   },
   "scripts": {
@@ -29,8 +36,9 @@
   "dependencies": {
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "prop-types": "^15.8.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "video.js": "^8.5.2",
+    "videojs-youtube": "^3.0.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.11.3",
@@ -52,6 +60,7 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie <= 11",
       "not op_mini all"
     ],
     "development": [
