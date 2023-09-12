@@ -1,6 +1,7 @@
 export enum KeyboardShortcuts {
     // `x` key = pause
     SAVE = 'g',
+    MUTE = 'm',
     PAUSE = 88,
     // `y` key = play
     PLAY = 89,

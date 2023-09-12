@@ -1,4 +1,4 @@
-import {Ref, forwardRef, useEffect, useImperativeHandle, useRef} from "react";
+import {Ref, forwardRef, useEffect, useImperativeHandle, useRef, useState} from "react";
 // import {useEffect, useRef, forwardRef, useState, useImperativeHandle} from "react";
 import videojs from "video.js";
 import "videojs-youtube";
@@ -36,12 +36,13 @@ const initialOptions = {
 };
 
 
-function LinceVideoPlayer(props: { url: string, type?: UrlType }, ref: Ref<unknown> | undefined) {
-    const {type, url} = props;
-    // const [count, setCount] = useState(0);
-    const videoNode = useRef(null);
+function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, ref: Ref<unknown> | undefined) {
+    const {type, url, key} = props;
+    // const [videoJSPlayer, setVideoJSPlayer] = useState();
+    // const videoNode = useRef(null);
     const player = useRef(null);
-    const initialized = useRef(false);
+    // const initialized = useRef(false);
+    const container = useRef(null)
 
     const getFileExtension = (link: string) => {
         if (link) {
@@ -61,42 +62,61 @@ function LinceVideoPlayer(props: { url: string, type?: UrlType }, ref: Ref<unkno
 
     useImperativeHandle(ref, () => ({
         //https://docs.videojs.com/docs/api/player.html#MethodscurrentTime
-        seek: (time: number) => {
-            console.log('that;s cool' + time)
-            // if (player.current) {
-            //     console.log("set time to " + time)
-            //     // player.current.currentTime = time;
-            // }
-        },
-        // getCurrentTime: () => {
-        //     if (player.current) {
-        //         return player.current.currentTime();
-        //     }
-        //     return -1;
-        // },
-    }), []);
-
-    useEffect(() => {
-        if (videoNode.current && !initialized.current) {
-            initialized.current = true; //prevent duplicate initialization
+        stop: () => {
             // @ts-ignore
-            player.current = videojs(videoNode.current, {
-                ...initialOptions,
-                ...videoJsOptions
-            }).ready(function () {
-                console.log("Player Ready");
-            });
-        }
-        //clear up player on dismount
+            player.current.stop();
+        },
+        play: () => {
+            // @ts-ignore
+            player.current.play();
+        },
+        pause: () => {
+            // @ts-ignore
+            player.current.pause();
+        },
+    }), []);
+    useEffect(() => {
+        // @ts-ignore
+        player.current = videojs(container.current, {
+                        ...initialOptions,
+                        ...videoJsOptions
+                    })
         return () => {
-            if (player.current) {
-                // @ts-ignore
-                player.current.dispose();
-            }
-        };
-    }, []);
+            // @ts-ignore
+            player.current.dispose()
+        }
+    }, [key])
 
-    return <video ref={videoNode} className="video-js"/>;
+    return (
+        <div data-vjs-player key={key}>
+            <video ref={container} className="video-js" key={`videoJs${key}`} />
+        </div>
+    )
+    // useEffect(() => {
+    //     if (videoNode.current && !initialized.current) {
+    //         initialized.current = true; //prevent duplicate initialization
+    //         // @ts-ignore
+    //         player.current = videojs(videoNode.current, {
+    //             ...initialOptions,
+    //             ...videoJsOptions
+    //         }).ready(function () {
+    //             console.log("Player Ready");
+    //         });
+    //         // @ts-ignore
+    //         console.log('playerId:' + videoNode.current.id)
+    //         // @ts-ignore
+    //         setVideoJSPlayer(videojs(videoNode.current.id))
+    //     }
+    //     //clear up player on dismount
+    //     return () => {
+    //         if (player.current) {
+    //             // @ts-ignore
+    //             player.current.dispose();
+    //         }
+    //     };
+    // }, [videoJSPlayer]);
+    // return <video ref={videoNode} className="video-js"/>;
 }
+
 // export default LinceVideoPlayer;
 export default forwardRef(LinceVideoPlayer);
