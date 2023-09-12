@@ -10,7 +10,7 @@ const logger = (info:string) => {
 // import InOutComponent from "./lib/components/base/In&OutComponent.tsx";
 
 const App = () => {
-    // const [parentValue, setParentValue] = useState('Initial value');
+    const [time, setTime] = useState();
     const youtubeVideo = useRef(null);
     const staticVideo = useRef(null);
     // const childComp = useRef(null);
@@ -48,11 +48,11 @@ const App = () => {
                 break;
             case KeyboardShortcuts.JUMP_FORWARD:
                 logger("+5")
-                functionalVideoAction((player: any) => player.stop())
+                functionalVideoAction((player: any) => player.addTime(5))
                 break;
             case KeyboardShortcuts.JUMP_BACK:
                 logger("-5")
-                functionalVideoAction((player: any) => player.stop())
+                functionalVideoAction((player: any) => player.addTime(-5))
                 break;
             default:
                 console.log("not implemented")
@@ -117,7 +117,7 @@ const App = () => {
                     </button>
                     <button onClick={() => {
                         executeVideoAction(KeyboardShortcuts.JUMP_FORWARD)
-                    }}>=5s
+                    }}>+5s
                     </button>
                     <button onClick={() => {
                         executeVideoAction(KeyboardShortcuts.SPEED_NORMAL)
@@ -131,6 +131,12 @@ const App = () => {
                         executeVideoAction(KeyboardShortcuts.MUTE)
                     }}>Mute
                     </button>
+                    <button onClick={() => {
+                       // @ts-ignore
+                        setTime(youtubeVideo.current.getCurrentTime());
+                    }}>Get time
+                    </button>
+                    <span>Current selected time: {time}</span>
                 </div>
             </div>
             <div className={"row"}>

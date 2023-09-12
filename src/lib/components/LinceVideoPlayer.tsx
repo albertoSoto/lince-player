@@ -36,7 +36,7 @@ const initialOptions = {
 };
 
 
-function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, ref: Ref<unknown> | undefined) {
+function LinceVideoPlayer(props: { key: string, url: string, type?: UrlType }, ref: Ref<unknown> | undefined) {
     const {type, url, key} = props;
     // const [videoJSPlayer, setVideoJSPlayer] = useState();
     // const videoNode = useRef(null);
@@ -66,7 +66,7 @@ function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, re
             // @ts-ignore
             player.current.pause();
             // @ts-ignore
-            return player.current.currentTime(0);
+            player.current.currentTime(0);
         },
         play: () => {
             // @ts-ignore
@@ -78,24 +78,31 @@ function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, re
         },
         toggleMute: () => {
             // @ts-ignore
-            player.current.volume()==0?player.current.volume(1):player.current.volume(0);
+            player.current.volume() == 0 ? player.current.volume(1) : player.current.volume(0);
         },
         playbackRate: (value: number) => {
-        //     @ts-ignore
+            //     @ts-ignore
             player.current.playbackRate(value);
         },
         getCurrentTime: () => {
             // @ts-ignore
             return player.current.currentTime();
+        },
+        addTime: (seconds: number) => {
+            player.current.currentTime(player.current.currentTime() + seconds);
+        },
+        getFullPlayer: () => {
+            // @ts-ignore
+            return player.current;
         }
 
     }), []);
     useEffect(() => {
         // @ts-ignore
         player.current = videojs(container.current, {
-                        ...initialOptions,
-                        ...videoJsOptions
-                    })
+            ...initialOptions,
+            ...videoJsOptions
+        })
         return () => {
             // @ts-ignore
             player.current.dispose()
@@ -104,7 +111,7 @@ function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, re
 
     return (
         <div data-vjs-player key={key}>
-            <video ref={container} className="video-js" key={`videoJs${key}`} />
+            <video ref={container} className="video-js" key={`videoJs${key}`}/>
         </div>
     )
     // useEffect(() => {
