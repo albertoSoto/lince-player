@@ -64,7 +64,9 @@ function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, re
         //https://docs.videojs.com/docs/api/player.html#MethodscurrentTime
         stop: () => {
             // @ts-ignore
-            player.current.seek(0);
+            player.current.pause();
+            // @ts-ignore
+            return player.current.currentTime(0);
         },
         play: () => {
             // @ts-ignore
