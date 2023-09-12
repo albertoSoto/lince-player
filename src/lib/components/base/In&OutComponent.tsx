@@ -1,4 +1,4 @@
-import React, {FC, forwardRef, Ref, useImperativeHandle, useState} from "react";
+import  {FC, forwardRef, Ref, useImperativeHandle, useState} from "react";
 
 interface IInOutComponent {
     name: string;
