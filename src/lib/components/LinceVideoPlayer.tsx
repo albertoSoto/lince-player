@@ -81,7 +81,7 @@ function LinceVideoPlayer(props: { key: string, url: string, type?: UrlType }, r
             player.current.volume() == 0 ? player.current.volume(1) : player.current.volume(0);
         },
         playbackRate: (value: number) => {
-            //     @ts-ignore
+            // @ts-ignore
             player.current.playbackRate(value);
         },
         getCurrentTime: () => {

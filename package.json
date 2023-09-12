@@ -3,7 +3,7 @@
   "config": {
     "npmTitle": "LINCE PLUS video player"
   },
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Video player used in LINCE PLUS",
   "author": "Alberto Soto Fernandez",
   "keywords": [
