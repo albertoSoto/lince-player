@@ -64,7 +64,7 @@ function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, re
         //https://docs.videojs.com/docs/api/player.html#MethodscurrentTime
         stop: () => {
             // @ts-ignore
-            player.current.stop();
+            player.current.seek(0);
         },
         play: () => {
             // @ts-ignore
@@ -74,6 +74,19 @@ function LinceVideoPlayer(props: { key:string, url: string, type?: UrlType }, re
             // @ts-ignore
             player.current.pause();
         },
+        toggleMute: () => {
+            // @ts-ignore
+            player.current.volume()==0?player.current.volume(1):player.current.volume(0);
+        },
+        playbackRate: (value: number) => {
+        //     @ts-ignore
+            player.current.playbackRate(value);
+        },
+        getCurrentTime: () => {
+            // @ts-ignore
+            return player.current.currentTime();
+        }
+
     }), []);
     useEffect(() => {
         // @ts-ignore

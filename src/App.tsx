@@ -28,23 +28,23 @@ const App = () => {
                 logger("Stop")
                 functionalVideoAction((player: any) => player.stop())
                 break;
-            case KeyboardShortcuts.MUTE:
+            case KeyboardShortcuts.MUTE: //ok
+                logger("Mute")
+                functionalVideoAction((player: any) => player.toggleMute())
                 break;
-            case KeyboardShortcuts.PLAY:
-                logger("Play")
+            case KeyboardShortcuts.PLAY: //ok
                 functionalVideoAction((player: any) => player.play())
                 break;
-            case KeyboardShortcuts.PAUSE:
-                logger("Pause")
+            case KeyboardShortcuts.PAUSE: //ok
                 functionalVideoAction((player: any) => player.pause())
                 break;
-            case KeyboardShortcuts.SPEED_NORMAL:
+            case KeyboardShortcuts.SPEED_NORMAL: //ok
                 logger("1x")
-                functionalVideoAction((player: any) => player.stop())
+                functionalVideoAction((player: any) => player.playbackRate(1.0))
                 break;
-            case KeyboardShortcuts.SPEED_SLOW:
+            case KeyboardShortcuts.SPEED_SLOW: //ok
                 logger("0.5")
-                functionalVideoAction((player: any) => player.stop())
+                functionalVideoAction((player: any) => player.playbackRate(0.5))
                 break;
             case KeyboardShortcuts.JUMP_FORWARD:
                 logger("+5")
@@ -139,7 +139,7 @@ const App = () => {
                                       type={UrlType.YoutubeUrl}/>
                 </div>
                 <div className={"column"}>
-                    <LinceVideoPlayer key={"video1"} ref={staticVideo} url={"/climbing.mp4"}/>
+                    <LinceVideoPlayer key={"video2"} ref={staticVideo} url={"/climbing.mp4"}/>
                 </div>
             </div>
         </div>
