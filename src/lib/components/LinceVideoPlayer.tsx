@@ -89,7 +89,12 @@ function LinceVideoPlayer(props: { key: string, url: string, type?: UrlType }, r
             return player.current.currentTime();
         },
         addTime: (seconds: number) => {
+            // @ts-ignore
             player.current.currentTime(player.current.currentTime() + seconds);
+        },
+        setTime: (seconds: number) => {
+            // @ts-ignore
+            player.current.currentTime(seconds);
         },
         getFullPlayer: () => {
             // @ts-ignore

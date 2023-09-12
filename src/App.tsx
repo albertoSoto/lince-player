@@ -24,7 +24,7 @@ const App = () => {
             })
         }
         switch (event) {
-            case KeyboardShortcuts.STOP:
+            case KeyboardShortcuts.STOP: //ok
                 logger("Stop")
                 functionalVideoAction((player: any) => player.stop())
                 break;
@@ -39,20 +39,21 @@ const App = () => {
                 functionalVideoAction((player: any) => player.pause())
                 break;
             case KeyboardShortcuts.SPEED_NORMAL: //ok
-                logger("1x")
                 functionalVideoAction((player: any) => player.playbackRate(1.0))
                 break;
             case KeyboardShortcuts.SPEED_SLOW: //ok
-                logger("0.5")
                 functionalVideoAction((player: any) => player.playbackRate(0.5))
                 break;
-            case KeyboardShortcuts.JUMP_FORWARD:
-                logger("+5")
+            case KeyboardShortcuts.JUMP_FORWARD: //ok
                 functionalVideoAction((player: any) => player.addTime(5))
                 break;
-            case KeyboardShortcuts.JUMP_BACK:
-                logger("-5")
+            case KeyboardShortcuts.JUMP_BACK: //ok
                 functionalVideoAction((player: any) => player.addTime(-5))
+                break;
+            case KeyboardShortcuts.SYNC: //KO
+                // @ts-ignore
+                const currentFirstVideoTime = videos[0].current.getCurrentTime();
+                functionalVideoAction((player: any) => player.setTime(currentFirstVideoTime))
                 break;
             default:
                 console.log("not implemented")
@@ -130,6 +131,10 @@ const App = () => {
                     <button onClick={() => {
                         executeVideoAction(KeyboardShortcuts.MUTE)
                     }}>Mute
+                    </button>
+                    <button onClick={() => {
+                        executeVideoAction(KeyboardShortcuts.SYNC)
+                    }}>Sync
                     </button>
                     <button onClick={() => {
                        // @ts-ignore

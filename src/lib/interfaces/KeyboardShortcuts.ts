@@ -13,4 +13,5 @@ export enum KeyboardShortcuts {
     SPEED_NORMAL = 's',
     JUMP_BACK = 'd',
     JUMP_FORWARD = 'f',
+    SYNC = '='
 }
